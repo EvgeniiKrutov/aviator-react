@@ -83,11 +83,10 @@ export default class GameScene {
   }
 
   animate() {
-    if (this.gameObjects && this.gameObjects.sea) {
-      this.gameObjects.sea.animate();
-    }
-    if (this.gameObjects && this.gameObjects.sky) {
-      this.gameObjects.sky.animate();
+    if (this.gameObjects) {
+      this.gameObjects?.sea?.animate();
+      this.gameObjects?.sky?.animate();
+      this.gameObjects?.airplane?.animate();
     }
 
     window.requestAnimationFrame(this.animate.bind(this));

@@ -86,4 +86,10 @@ export default class Airplane {
     this.mesh.scale.set(0.25, 0.25, 0.25);
     this.mesh.position.y = 100;
   }
+
+  animate() {
+    if (!this.propeller) return;
+
+    this.propeller.rotation.x += 0.06;
+  }
 }
