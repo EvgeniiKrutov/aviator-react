@@ -40,6 +40,6 @@ export default class Sky {
   animate() {
     if (!this.mesh) return;
 
-    this.mesh.rotation.z += 0.005;
+    this.mesh.rotation.z += 0.004;
   }
 }

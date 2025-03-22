@@ -1,6 +1,11 @@
 import * as THREE from 'three';
 import { colors } from '../constants/constants';
 
+interface IPosition {
+  x: number;
+  y: number;
+}
+
 export default class GameScene {
   private scene?: THREE.Scene;
   private camera?: THREE.PerspectiveCamera;
@@ -12,6 +17,8 @@ export default class GameScene {
   private hemisphereLight?: THREE.HemisphereLight;
   private directionalLight?: THREE.DirectionalLight;
   private gameObjects?: Record<string, any>;
+
+  private position: IPosition = { x: 0, y: 0 };
 
   constructor(canvasId: string) {
     this.canvasId = canvasId;
@@ -86,7 +93,7 @@ export default class GameScene {
     if (this.gameObjects) {
       this.gameObjects?.sea?.animate();
       this.gameObjects?.sky?.animate();
-      this.gameObjects?.airplane?.animate();
+      this.gameObjects?.airplane?.animate(this.position);
     }
 
     window.requestAnimationFrame(this.animate.bind(this));
@@ -116,5 +123,9 @@ export default class GameScene {
 
   setGameObjects(gameObjects: Record<string, any>) {
     this.gameObjects = gameObjects;
+  }
+
+  setPosition(newPosition: IPosition) {
+    this.position = newPosition;
   }
 }

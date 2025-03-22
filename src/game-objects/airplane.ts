@@ -87,9 +87,30 @@ export default class Airplane {
     this.mesh.position.y = 100;
   }
 
-  animate() {
-    if (!this.propeller) return;
+  animate(position: any) {
+    if (!this.propeller || !this.mesh) return;
 
     this.propeller.rotation.x += 0.06;
+
+    const targetX = this.normalize(position.x, -1, 1, -100, 100);
+    const targetY = this.normalize(position.y, -1, 1, 25, 175);
+    this.mesh.position.x = targetX;
+    this.mesh.position.y = targetY;
+  }
+
+  private normalize(
+    position: number,
+    normMin: number,
+    normMax: number,
+    screenMin: number,
+    screenMax: number
+  ) {
+    const normalizedValue = Math.max(Math.min(position, normMax), normMin);
+    const normRange = normMax - normMin;
+    const positiveCoordinate = (normalizedValue - normMin) / normRange;
+    const targetRange = screenMax - screenMin;
+    const targetValue = screenMin + positiveCoordinate * targetRange;
+
+    return targetValue;
   }
 }
