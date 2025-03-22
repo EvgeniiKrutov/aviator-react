@@ -92,7 +92,7 @@ export default class Airplane {
 
     this.propeller.rotation.x += 0.06;
 
-    const targetX = this.normalize(position.x, -1, 1, -100, 100);
+    const targetX = this.normalize(position.x, -1, 1, -150, 150);
     const targetY = this.normalize(position.y, -1, 1, 25, 175);
     this.mesh.position.x = targetX;
     this.mesh.position.y = targetY;
