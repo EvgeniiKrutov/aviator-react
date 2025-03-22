@@ -90,12 +90,16 @@ export default class Airplane {
   animate(position: any) {
     if (!this.propeller || !this.mesh) return;
 
-    this.propeller.rotation.x += 0.06;
+    this.propeller.rotation.x += 0.07;
 
-    const targetX = this.normalize(position.x, -1, 1, -150, 150);
-    const targetY = this.normalize(position.y, -1, 1, 25, 175);
-    this.mesh.position.x = targetX;
-    this.mesh.position.y = targetY;
+    const targetX = this.normalize(position.x, -0.75, 0.75, -150, 150);
+    const targetY = this.normalize(position.y, -0.75, 0.75, 50, 175);
+
+    this.mesh.position.x += (targetX - this.mesh.position.x) * 0.1;
+    this.mesh.position.y += (targetY - this.mesh.position.y) * 0.1;
+
+    this.mesh.rotation.z = (targetY - this.mesh.position.y) * 0.015;
+    this.mesh.rotation.x = (this.mesh.position.y - targetY) * 0.007;
   }
 
   private normalize(
